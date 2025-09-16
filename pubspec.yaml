@@ -1,0 +1,112 @@
+name: reptran_app
+description: "Transform through reps"
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+  # If you want to pin Flutter channel, you can also add a .fvm/fvm_config.json or
+  # rely on your toolchain; pubspec doesn't take a flutter version.
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # --- UI foundation ---
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.3.0
+  flutter_svg: ^2.2.0
+  animations: ^2.0.11 # Material motion widgets (screen/page transitions)
+  flutter_animate: ^4.5.2 # Widget-level micro-animations
+  phosphor_flutter: ^2.1.0
+
+  # --- State & navigation ---
+  flutter_riverpod: ^2.6.1
+  go_router: ^16.2.0
+
+  # --- Provider packages ---
+  google_sign_in: ^7.1.1
+  flutter_facebook_auth: ^7.1.2
+  twitter_login: ^4.4.2
+
+  # --- Networking & models ---
+  dio: ^5.9.0
+  json_annotation: ^4.9.0
+  freezed_annotation: ^3.1.0
+  intl: ^0.20.2
+
+  # --- Local storage ---
+  flutter_secure_storage: ^9.2.4 # secrets/tokens
+  shared_preferences: ^2.5.3 # lightweight flags
+  drift: ^2.28.1
+  sqlite3_flutter_libs: ^0.5.39
+
+  # --- Crash/Analytics report ---
+  sentry_flutter: ^9.6.0
+  # firebase_core: ^4.0.0
+  # firebase_analytics: ^12.0.0
+
+  # --- Output ---
+  logger: ^2.6.1
+
+  # --- Environment ---
+  flutter_dotenv: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # --- Codegen ---
+  build_runner: ^2.7.0
+  freezed: ^3.2.0
+  json_serializable: ^6.10.0
+  drift_dev: ^2.28.1
+
+  # --- QA / tooling ---
+  mocktail: ^1.0.4
+  alchemist: ^0.12.1 # golden tests (replacement for golden_toolkit)
+  flutter_lints: ^5.0.0
+
+  # --- Asset generators (build-time only) ---
+  flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+  # Easier to maintain: include all images in the folder
+  assets:
+    - assets/images/
+    - .env
+
+# --- Splash configuration ---
+# Consider aligning the color with your brand palette (e.g., primary #0F6F6E).
+flutter_native_splash:
+  color: "#F8F9FA"
+  image: assets/images/splash_logo.png
+
+  color_dark: "#1E1E1E"
+  image_dark: assets/images/splash_logo_white.png
+
+  android_12:
+    image: assets/images/splash_logo.png
+    color: "#F8F9FA"
+    image_dark: assets/images/splash_logo_white.png
+    color_dark: "#1E1E1E"
+  web: false
+
+# --- App icon configuration ---
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/reptran_launcher_icon.png"
+  adaptive_icon_foreground: "assets/images/reptran_launcher_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/images/reptran_launcher_icon.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+    icon_size: 48
