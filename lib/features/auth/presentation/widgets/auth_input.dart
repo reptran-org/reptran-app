@@ -10,6 +10,7 @@ class AuthInput extends StatelessWidget {
   final Widget? suffix;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+   final FocusNode? focusNode; 
 
   const AuthInput({
     super.key,
@@ -20,6 +21,7 @@ class AuthInput extends StatelessWidget {
     this.suffix,
     this.keyboardType,
     this.validator,
+     this.focusNode,
   });
 
   @override
@@ -31,6 +33,7 @@ class AuthInput extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         obscureText: obscureText,
+        focusNode: focusNode, 
         keyboardType: keyboardType,
         validator: validator,
         decoration: InputDecoration(

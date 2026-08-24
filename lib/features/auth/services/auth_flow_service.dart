@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:reptran_app/features/welcome/routes.dart';
 import 'package:reptran_app/features/auth/services/auth_services.dart';
 import 'package:reptran_app/core/network/api_client.dart';
+import 'package:reptran_app/features/notifications/services/device_service.dart';
 
 const String loginRoute = '/auth/login';
 const String onboardingReasonRoute = '/onboarding/reason';
@@ -23,65 +24,102 @@ class AuthFlowService {
   static final _secureStorage = const FlutterSecureStorage();
   static final Dio _dio = ApiClient().dio;
 
-  /// Entry point to decide where the user should go.
   static Future<void> decideAndRoute(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
-    try {
-      final access = await _secureStorage.read(key: 'auth_token');
-      final refresh = await _secureStorage.read(key: 'refresh_token');
+    String? access;
+    String? refresh;
 
+    /// 🔒 Safe secure storage read
+    try {
+      access = await _secureStorage.read(key: 'auth_token');
+      refresh = await _secureStorage.read(key: 'refresh_token');
+    } catch (_) {
+      await _secureStorage.deleteAll();
+      access = null;
+      refresh = null;
+    }
+
+    try {
+      /// 🚫 No tokens
       if (access == null && refresh == null) {
         final hasAccount = await AuthServices.hasAccountMarker();
+
+        if (!context.mounted) return;
+
         if (hasAccount) {
-          if (context.mounted) context.go(loginRoute);
+          context.go(loginRoute);
         } else {
-          if (context.mounted) context.go(WelcomeRoutes.path);
+          context.go(WelcomeRoutes.path);
         }
         return;
       }
 
+      /// 🔑 Access token flow
       if (access != null) {
         _dio.options.headers['Authorization'] = 'Bearer $access';
+
         if (!context.mounted) return;
 
-        final meOk = await _tryGetMeAndRoute(context);
+        final meOk = await _tryGetMeAndRoute(
+          context,
+        ).timeout(const Duration(seconds: 10));
 
         if (meOk) return;
 
         if (refresh != null) {
-          final refreshed = await _tryRefresh();
+          final refreshed = await _tryRefresh().timeout(
+            const Duration(seconds: 10),
+          );
+
           if (refreshed) {
             if (!context.mounted) return;
 
-            final meOk2 = await _tryGetMeAndRoute(context);
+            final meOk2 = await _tryGetMeAndRoute(
+              context,
+            ).timeout(const Duration(seconds: 10));
+
             if (meOk2) return;
           }
         }
 
-        await _clearTokensLocally();
+        await _secureStorage.deleteAll();
+
         if (context.mounted) context.go(loginRoute);
         return;
       }
 
+      /// 🔄 Refresh-only flow
       if (refresh != null) {
-        final refreshed = await _tryRefresh();
+        final refreshed = await _tryRefresh().timeout(
+          const Duration(seconds: 10),
+        );
+
         if (refreshed) {
           if (!context.mounted) return;
 
-          final meOk2 = await _tryGetMeAndRoute(context);
+          final meOk2 = await _tryGetMeAndRoute(
+            context,
+          ).timeout(const Duration(seconds: 10));
+
           if (meOk2) return;
         }
-        await _clearTokensLocally();
+
+        await _secureStorage.deleteAll();
+
         if (context.mounted) context.go(loginRoute);
       }
     } catch (_) {
-      final hadAny = await _hasAnyToken();
-      if (hadAny) {
-        await _clearTokensLocally();
-        if (context.mounted) context.go(loginRoute);
+      await _secureStorage.deleteAll();
+
+      final hasAccount = await AuthServices.hasAccountMarker();
+
+      if (!context.mounted) return;
+
+      if (hasAccount) {
+        context.go(loginRoute);
       } else {
-        if (context.mounted) context.go(WelcomeRoutes.path);
+        context.go(WelcomeRoutes.path);
       }
     }
   }
@@ -101,6 +139,10 @@ class AuthFlowService {
     try {
       final resp = await _dio.get('/auth/me');
       if (resp.statusCode == 200) {
+        try {
+          await DeviceService().registerDevice(source: "app_start");
+        } catch (_) {}
+
         final data = resp.data as Map<String, dynamic>;
         final user = data['user'] as Map<String, dynamic>? ?? {};
         final onboarded = user['onboardingCompleted'] as bool? ?? false;

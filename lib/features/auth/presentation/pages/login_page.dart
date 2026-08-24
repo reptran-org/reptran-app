@@ -305,15 +305,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                SocialIconsRow(
-                  onFacebook: () =>
-                      SocialAuthService.handleFacebookSignIn(context),
-                  onGoogle: () => SocialAuthService.handleGoogleSignIn(context),
-                  onTwitter: () =>
-                      SocialAuthService.handleTwitterSignIn(context),
-                ),
+               GoogleSignInButton(
+  onTap: () => SocialAuthService.handleGoogleSignIn(context),
+),
               ],
             ),
+         
+         
           ],
         ),
       ),

@@ -12,6 +12,28 @@ import 'package:reptran_app/features/auth/helpers/validators.dart';
 import 'package:reptran_app/features/auth/services/auth_service.dart';
 import 'package:reptran_app/features/auth/services/social_auth_service.dart';
 
+List<String> getPasswordErrors(String password) {
+  final errors = <String>[];
+
+  if (password.length < 8) {
+    errors.add('At least 8 characters');
+  }
+  if (!RegExp(r'[a-z]').hasMatch(password)) {
+    errors.add('Lowercase letter');
+  }
+  if (!RegExp(r'[A-Z]').hasMatch(password)) {
+    errors.add('Uppercase letter');
+  }
+  if (!RegExp(r'\d').hasMatch(password)) {
+    errors.add('Number');
+  }
+  if (!RegExp(r'[\W_]').hasMatch(password)) {
+    errors.add('Special character');
+  }
+
+  return errors;
+}
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -24,7 +46,28 @@ class _SignUpPageState extends State<SignUpPage> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmCtrl = TextEditingController();
+  final _passwordFocus = FocusNode();
+  bool _hasStartedTypingPassword = false;
 
+  List<String> _passwordErrors = [];
+
+@override
+void initState() {
+  super.initState();
+
+ _passwordCtrl.addListener(() {
+  final value = _passwordCtrl.text.trim();
+
+  setState(() {
+    _hasStartedTypingPassword = value.isNotEmpty;
+    _passwordErrors = getPasswordErrors(value);
+  });
+});
+
+  _passwordFocus.addListener(() {
+    setState(() {}); // 🔥 triggers rebuild when focus changes
+  });
+}
   final _formKey = GlobalKey<FormState>();
 
   bool _loading = false;
@@ -38,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
     _confirmCtrl.dispose();
+    _passwordFocus.dispose();
     super.dispose();
   }
 
@@ -131,6 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
               hint: 'Password',
               icon: PhosphorIconsRegular.lock,
               controller: _passwordCtrl,
+               focusNode: _passwordFocus,
               obscureText: _obscurePassword,
               validator: passwordValidator,
               suffix: GestureDetector(
@@ -148,6 +193,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 8),
+AnimatedSize(
+  duration: const Duration(milliseconds: 250),
+  curve: Curves.easeInOut,
+  child: AnimatedSwitcher(
+    duration: const Duration(milliseconds: 200),
+    child: _passwordFocus.hasFocus
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: _buildPasswordRules(),
+          )
+        : const SizedBox.shrink(),
+  ),
+),
             const SizedBox(height: AppSpacing.sm),
             AuthInput(
               hint: 'Confirm Password',
@@ -234,12 +293,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                SocialIconsRow(
-                  onFacebook: () =>
-                      SocialAuthService.handleFacebookSignIn(context),
-                  onGoogle: () => SocialAuthService.handleGoogleSignIn(context),
-                  onTwitter: () =>
-                      SocialAuthService.handleTwitterSignIn(context),
+                GoogleSignInButton(
+                  onTap: () => SocialAuthService.handleGoogleSignIn(context),
                 ),
               ],
             ),
@@ -248,4 +303,49 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+Widget _buildPasswordRules() {
+  final rules = [
+    'At least 8 characters',
+    'Lowercase letter',
+    'Uppercase letter',
+    'Number',
+    'Special character',
+  ];
+
+  final isTyping = _hasStartedTypingPassword;
+
+  return Column(
+    key: const ValueKey('password_rules'),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: rules.map((rule) {
+      final isValid = !_passwordErrors.contains(rule);
+
+      final color = !isTyping
+          ? Colors.grey
+          : isValid
+              ? Colors.green
+              : Colors.red;
+
+      return Row(
+        children: [
+          Icon(
+            isValid ? Icons.check_circle : Icons.cancel,
+            size: 18,
+            color: color,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            rule,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      );
+    }).toList(),
+  );
+}
+
 }

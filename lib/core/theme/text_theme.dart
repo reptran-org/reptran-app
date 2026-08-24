@@ -20,7 +20,7 @@ TextTheme buildTextTheme(ColorScheme scheme) {
       fontSize: AppTypography.title,
       height: AppTypography.lhNormal,
       fontWeight: AppTypography.wSemibold,
-      color: base.withValues(alpha: AppOpacities.secondary),
+      color: base.withValues(alpha: AppOpacities.primary),
     ),
     bodyMedium: TextStyle(
       fontSize: AppTypography.body,

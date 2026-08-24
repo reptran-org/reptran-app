@@ -11,12 +11,17 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  String? _error;
-
   @override
   void initState() {
     super.initState();
-    AuthFlowService.decideAndRoute(context);
+    _init();
+  }
+
+  Future<void> _init() async {
+    await Future.delayed(Duration.zero);
+    if (!mounted) return;
+
+    await AuthFlowService.decideAndRoute(context);
   }
 
   @override
@@ -24,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     final scheme = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     final brightness = scheme.brightness;
-    final logoSize = size.width * 0.40; // scales with screen
+    final logoSize = size.width * 0.40;
 
     return Scaffold(
       backgroundColor: scheme.surface,
@@ -32,7 +37,6 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Logo
             Image.asset(
                   brightness == Brightness.dark
                       ? 'assets/images/reptran_logo_white.png'
@@ -44,7 +48,6 @@ class _SplashPageState extends State<SplashPage> {
                 .fadeIn(duration: 350.ms)
                 .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOut),
 
-            // Tagline
             Text(
                   'Transform through reps',
                   textAlign: TextAlign.center,
@@ -56,11 +59,6 @@ class _SplashPageState extends State<SplashPage> {
                 .animate(delay: 300.ms)
                 .fadeIn(duration: 500.ms, curve: Curves.easeOut)
                 .slideY(begin: 0.4, end: 0.0, curve: Curves.easeOutCubic),
-
-            if (_error != null) ...[
-              const SizedBox(height: 16),
-              Text(_error!, style: const TextStyle(color: Colors.red)),
-            ],
           ],
         ),
       ),

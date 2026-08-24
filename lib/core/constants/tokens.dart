@@ -28,6 +28,7 @@ class AppColors {
 
 /// Spacing (8pt grid)
 class AppSpacing {
+  static const xxs = 4.0; // tight: heading→subheading, icon→text
   static const xs = 8.0; // tight: heading→subheading, icon→text
   static const sm = 16.0; // related items: option→option, input→input
   static const md = 24.0; // section gaps: heading→content, input→button
@@ -189,4 +190,22 @@ class AppBorders {
 
   static Border boxCard(ColorScheme scheme) =>
       Border.all(color: scheme.outline, width: 1);
+}
+
+class AppScale {
+  static double _scaleFactor(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final rawScale = width / 375;
+
+    return rawScale.clamp(0.9, 1.1);
+  }
+
+  static double s(BuildContext context, double size) {
+    return size * _scaleFactor(context);
+  }
+
+  static double t(BuildContext context, double size) {
+    final scale = _scaleFactor(context).clamp(0.95, 1.1);
+    return size * scale;
+  }
 }

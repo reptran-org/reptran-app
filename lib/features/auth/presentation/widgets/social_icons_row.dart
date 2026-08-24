@@ -1,71 +1,51 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reptran_app/core/constants/tokens.dart';
 
-typedef SocialTap = void Function();
+class GoogleSignInButton extends StatelessWidget {
+  final VoidCallback? onTap;
 
-class SocialIconsRow extends StatelessWidget {
-  final SocialTap? onGoogle;
-  final SocialTap? onFacebook;
-  final SocialTap? onTwitter;
-
-  const SocialIconsRow({
-    super.key,
-    this.onGoogle,
-    this.onFacebook,
-    this.onTwitter,
-  });
-
-  Widget _icon(
-    String asset,
-    SocialTap? onTap,
-    BuildContext context, {
-    Color? override,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: AppShadows.e1(scheme),
-          color: scheme.surface,
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            asset,
-            width: 24,
-            height: 24,
-            colorFilter: override != null
-                ? ColorFilter.mode(override, BlendMode.srcIn)
-                : null,
-          ),
-        ),
-      ),
-    );
-  }
+  const GoogleSignInButton({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _icon('assets/images/facebook-svg.svg', onFacebook, context),
-        const SizedBox(width: AppSpacing.sm),
-        _icon('assets/images/google-svg.svg', onGoogle, context),
-        const SizedBox(width: AppSpacing.sm),
-        _icon(
-          'assets/images/twitter-svg.svg',
-          onTwitter,
-          context,
-          override: scheme.brightness == Brightness.dark
-              ? Colors.white
-              : Colors.black,
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 52,
+        decoration: BoxDecoration(
+          color: scheme.surface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: scheme.outline.withValues(alpha: 0.2),
+          ),
+          boxShadow: AppShadows.e1(scheme),
         ),
-      ],
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'assets/images/google-svg.svg',
+              width: 22,
+              height: 22,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              "Continue with Google",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: AppTypography.wMedium,
+                color: scheme.onSurface,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
