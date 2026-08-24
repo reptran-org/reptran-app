@@ -1,0 +1,218 @@
+{
+  "project_info": {
+    "project_number": "935093031021",
+    "project_id": "reptran-6ccec",
+    "storage_bucket": "reptran-6ccec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935093031021:android:041f9c9f3bd0793fbfef64",
+        "android_client_info": {
+          "package_name": "com.example.reptran_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935093031021-avnp3s58p15nmjhcuvqe5g44nhpk5elg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reptran_app",
+            "certificate_hash": "e5dff598ffcbfabca7bba2635d180a7b8b7206f5"
+          }
+        },
+        {
+          "client_id": "935093031021-jmjde4n391jf23gor4v7kfqd2lj7fqr4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reptran_app",
+            "certificate_hash": "18ed60bb4d58661de0ee5e4dab40cc3f43f2c7c3"
+          }
+        },
+        {
+          "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1RC60RVnoPe0lOk0Ww96rQSuy7GEg3fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935093031021-btcel6hrio9v1qdhdphli4sja3q1a1fm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reptranApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935093031021:android:870a75a442f9da30bfef64",
+        "android_client_info": {
+          "package_name": "com.example.reptran_app.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935093031021-49ng73gagam6t1u8kuggkif7cgucfmn5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reptran_app.debug",
+            "certificate_hash": "18ed60bb4d58661de0ee5e4dab40cc3f43f2c7c3"
+          }
+        },
+        {
+          "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1RC60RVnoPe0lOk0Ww96rQSuy7GEg3fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935093031021-btcel6hrio9v1qdhdphli4sja3q1a1fm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reptranApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935093031021:android:fd94e4110f395862bfef64",
+        "android_client_info": {
+          "package_name": "com.reptran.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935093031021-jvdua1u41nru67tuivic63d7ct4jfbtt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reptran.app",
+            "certificate_hash": "c21ef205d5c0d3800f181fa1972b1363c1040c11"
+          }
+        },
+        {
+          "client_id": "935093031021-n2std97bn8j9v63hrme0jl7lu7cu2hl2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reptran.app",
+            "certificate_hash": "e5dff598ffcbfabca7bba2635d180a7b8b7206f5"
+          }
+        },
+        {
+          "client_id": "935093031021-v6buvm2jhrtdnkgee83vbrmano35f855.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reptran.app",
+            "certificate_hash": "18ed60bb4d58661de0ee5e4dab40cc3f43f2c7c3"
+          }
+        },
+        {
+          "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1RC60RVnoPe0lOk0Ww96rQSuy7GEg3fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935093031021-btcel6hrio9v1qdhdphli4sja3q1a1fm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reptranApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935093031021:android:9e407b7114c22d8bbfef64",
+        "android_client_info": {
+          "package_name": "com.reptran.app.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935093031021-3ct063ct8h3tqjivim51p0mpiis0hnju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reptran.app.debug",
+            "certificate_hash": "18ed60bb4d58661de0ee5e4dab40cc3f43f2c7c3"
+          }
+        },
+        {
+          "client_id": "935093031021-qvqu1tmmp5tne60a24lcpl4r0ngpg9ok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reptran.app.debug",
+            "certificate_hash": "e5dff598ffcbfabca7bba2635d180a7b8b7206f5"
+          }
+        },
+        {
+          "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1RC60RVnoPe0lOk0Ww96rQSuy7GEg3fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935093031021-rsbknrsssp3032sl9p4tnn3apnjrvbdq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "935093031021-btcel6hrio9v1qdhdphli4sja3q1a1fm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reptranApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

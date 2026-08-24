@@ -26,12 +26,20 @@ class _OnboardingFutureSelfPageState extends State<OnboardingFutureSelfPage> {
   int? selectedIndex;
   bool _saving = false;
 
+  // final List<String> options = [
+  //   "I want to be someone who never skips workouts.",
+  //   "I want to live long & strong.",
+  //   "I want to prove I can be disciplined.",
+  //   "I'm not sure yet — I just want to start.",
+  // ];
+
   final List<String> options = [
-    "I want to be someone who never skips workouts.",
-    "I want to live long & strong.",
-    "I want to prove I can be disciplined.",
-    "I'm not sure yet — I just want to start.",
-  ];
+  "I want to start showing up.",
+  "I used to be consistent, but I’ve drifted.",
+  "I work out sometimes, but it’s unstable.",
+  "I show up fairly often, but not reliably.",
+  "I already train, but I want it to feel automatic.",
+];
 
   @override
   void initState() {
@@ -124,7 +132,8 @@ class _OnboardingFutureSelfPageState extends State<OnboardingFutureSelfPage> {
 
     return OnboardingScaffold(
       icon: icon,
-      title: "When you picture your future self, which feels most true?",
+      // title: "When you picture your future self, which feels most true?",
+      title: "Which feels most true right now?",
       titleGradient: true, // <-- use gradient like earlier
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

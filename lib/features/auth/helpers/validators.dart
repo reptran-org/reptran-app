@@ -13,6 +13,24 @@ String? emailValidator(String? v) {
 
 String? passwordValidator(String? v) {
   if (v == null || v.isEmpty) return 'Password is required';
-  if (v.length < 6) return 'Password must be at least 6 characters';
+
+  final password = v.trim();
+
+  if (password.length < 8) {
+    return 'Must be at least 8 characters';
+  }
+  if (!RegExp(r'[a-z]').hasMatch(password)) {
+    return 'Must include a lowercase letter';
+  }
+  if (!RegExp(r'[A-Z]').hasMatch(password)) {
+    return 'Must include an uppercase letter';
+  }
+  if (!RegExp(r'\d').hasMatch(password)) {
+    return 'Must include a number';
+  }
+  if (!RegExp(r'[\W_]').hasMatch(password)) {
+    return 'Must include a special character';
+  }
+
   return null;
 }

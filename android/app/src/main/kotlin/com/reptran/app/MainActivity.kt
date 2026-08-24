@@ -1,4 +1,4 @@
-package com.example.reptran_app
+package com.reptran.app
 
 import io.flutter.embedding.android.FlutterActivity
 

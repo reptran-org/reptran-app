@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:reptran_app/core/network/api_client.dart';
+import 'package:reptran_app/shared/services/timezone_service.dart';
 
 class AuthService {
   final Dio _dio = ApiClient().dio;
@@ -93,14 +94,14 @@ class AuthService {
   }) {
     return _dio.post(
       '/auth/signup',
-      data: {'name': name, 'email': email, 'password': password},
+      data: {'name': name, 'email': email, 'password': password,'timezone': TimezoneService.timezone,},
     );
   }
 
   Future<Response> login({required String email, required String password}) {
     return _dio.post(
       '/auth/login',
-      data: {'email': email, 'password': password},
+      data: {'email': email, 'password': password,'timezone': TimezoneService.timezone,},
     );
   }
 
